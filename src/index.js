@@ -1,5 +1,5 @@
 import React from 'react'
 import {render} from 'react-dom'
-import Greeter from './components/Greeter'
+import Home from './page/Home'
 
-render(<Greeter/>, document.getElementById('root'))
+render(<Home/>, document.getElementById('root'))
