@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 19:24:02
+ * @Last Modified time: 2018-09-14 19:26:34
  */
 
 import React, { Component } from "react";
@@ -63,7 +63,7 @@ export default class Home extends Component {
               <AuthButton />
             </Header>
             <Content style={{ padding: "0 50px", marginTop: 64 }}>
-              <div style={{ background: "#fff", padding: 24, minHeight: 380 }}>
+              <div style={{ background: "#fff", padding: 24, minHeight: 1000 }}>
                 <Route exact path="/" component={Greeter} />
                 <Route path="/login" component={Login} />
               </div>
