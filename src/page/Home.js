@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 16:13:12
+ * @Last Modified time: 2018-09-14 16:17:58
  */
 
 import React, { Component } from "react";
@@ -39,7 +39,6 @@ const store = observable({
 });
 
 const AuthButton = inject("store")(props => {
-  console.log(props);
   return !props.store.isAuth ? (
     ""
   ) : (
