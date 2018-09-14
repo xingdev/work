@@ -14,6 +14,9 @@ const presets = [
   ]
 ];
 
-const plugins = ["@babel/plugin-proposal-class-properties"];
+const plugins = [
+  "@babel/plugin-proposal-class-properties",
+  ["@babel/plugin-proposal-decorators", { legacy: true }]
+];
 
 module.exports = { presets, plugins };

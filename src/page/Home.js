@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 14:08:29
+ * @Last Modified time: 2018-09-14 16:13:12
  */
 
 import React, { Component } from "react";
@@ -13,9 +13,12 @@ import {
   Link,
   withRouter
 } from "react-router-dom";
+import { observable } from "mobx";
+import { inject, Provider } from "mobx-react";
 import Greeter from "./Greeter";
 import Login from "./Login";
 import LOGO_SVG from "../assets/logo.svg";
+
 const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
@@ -28,74 +31,43 @@ const fakeAuth = {
   }
 };
 
-const auth = {
+const store = observable({
+  isAuth: false,
   userInfo: {
     name: ""
-  },
-  isLogin: false,
-  login(cb) {
-    this.isLogin = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb) {
-    this.isLogin = false;
-    setTimeout(cb, 100); // fake async
   }
-};
-
-const AuthButton = withRouter(({ history }) => {
-  return auth.isLogin ? (
-    <button
-      onClick={() => {
-        auth.signout(() => history.push("/login"));
-      }}
-    >
-      signout
-    </button>
-  ) : (
-    ""
-  );
 });
 
-const OldSchoolMenuLink = ({ label, to, activeOnlyWhenExact }) => (
-  <Route
-    path={to}
-    exact={activeOnlyWhenExact}
-    children={({ match }) => (
-      <div className={match ? "active" : ""}>
-        {match ? "> " : ""}
-        <Link to={to}>{label}</Link>
-      </div>
-    )}
-  />
-);
-
-const NoMatch = ({location}) => {
-  return <div>404 Not Found</div>;
-};
-
+const AuthButton = inject("store")(props => {
+  console.log(props);
+  return !props.store.isAuth ? (
+    ""
+  ) : (
+    <button onClick={() => (props.store.isAuth = false)}>signout</button>
+  );
+});
 export default class Home extends Component {
-  state = {
-    isLogin: auth.isLogin
-  };
   render() {
     return (
-      <Router>
-        <div>
-          <img src={LOGO_SVG} alt="" width={50} height={50} />
-          <span>DEMO LINK</span>
-          <OldSchoolMenuLink activeOnlyWhenExact={true} to="/" label="Home" />
-          <OldSchoolMenuLink to="/login" label="Login" />
-          <Link to="/also/will/not/match">Also Will Not Match</Link>
-          <AuthButton />
-          <Route exact path="/" render={() => <Greeter auth={auth} />} />
-          <Route
-            path="/login"
-            render={props => <Login {...props} auth={auth} />}
-          />
-          <Route component={NoMatch} />
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <img src={LOGO_SVG} alt="" width={50} height={50} />
+            <span>DEMO LINK</span>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="login">Login</Link>
+              </li>
+            </ul>
+            <AuthButton />
+            <Route exact path="/" component={Greeter} />
+            <Route path="/login" component={Login} />
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }

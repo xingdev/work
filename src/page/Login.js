@@ -2,35 +2,28 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 15:50:11 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 13:37:39
+ * @Last Modified time: 2018-09-14 16:14:30
  */
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { observer, inject } from "mobx-react";
+@inject("store")
+@observer
 export default class Login extends Component {
-  state = {
-    isAuth: this.props.auth.isLogin
-  };
+  state = {};
   onLogin = () => {
-    const { auth } = this.props;
     if (!this.state.name) return alert("name required");
-    auth.userInfo.name = this.state.name;
-    auth.login(() => {
-      this.setState({
-        isAuth: true
-      });
-    });
+    this.props.store.isAuth = true;
+    this.props.store.userInfo.name = this.state.name;
   };
   onChange = e => {
     if (e.target) {
       this.setState({ name: e.target.value });
     }
   };
+
   render() {
-    console.log(this.props);
-    if (this.state.isAuth) {
-      return <Redirect to={{ pathname: "/" }} />;
-    }
-    return (
+    return !this.props.store.isAuth ? (
       <div>
         <div>
           name:&nbsp;&nbsp;
@@ -38,6 +31,8 @@ export default class Login extends Component {
         </div>
         <button onClick={this.onLogin}>login</button>
       </div>
+    ) : (
+      "is logged"
     );
   }
 }
