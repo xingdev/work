@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 18:43:55
+ * @Last Modified time: 2018-09-14 18:56:09
  */
 
 import React, { Component } from "react";
@@ -35,9 +35,16 @@ export default class Home extends Component {
       <Provider store={store}>
         <Router>
           <Layout className="layout">
-            <Header>
-              <div className="logo" />
-              <Menu theme="dark" mode="horizontal">
+            <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+              <div className="logo">
+                <img src={LOGO_SVG} alt="logo" height={35} />
+                <span>Project Demo</span>
+              </div>
+              <Menu
+                theme="dark"
+                mode="horizontal"
+                style={{ lineHeight: "64px" }}
+              >
                 <Menu.Item>
                   <Link to="/">Home</Link>
                 </Menu.Item>
@@ -46,11 +53,16 @@ export default class Home extends Component {
                 </Menu.Item>
               </Menu>
             </Header>
-            <Content style={{ padding: "0 50px" }}>
-              <AuthButton />
-              <Route exact path="/" component={Greeter} />
-              <Route path="/login" component={Login} />
+            <Content style={{ padding: "0 50px", marginTop: 64 }}>
+              <div style={{ background: "#fff", padding: 24, minHeight: 380 }}>
+                <AuthButton />
+                <Route exact path="/" component={Greeter} />
+                <Route path="/login" component={Login} />
+              </div>
             </Content>
+            <Footer style={{ textAlign: "center" }}>
+              Ant Design ©2018 Created by Ant UED
+            </Footer>
           </Layout>
         </Router>
       </Provider>
