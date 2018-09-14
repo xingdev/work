@@ -16,11 +16,33 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /(\.jsx|\.js)/,
+        test: /(\.jsx|\.js)$/,
         use: {
           loader: "babel-loader"
         },
         exclude: /node_modules/
+      },
+      {
+        test: /.css$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/i,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192
+            }
+          }
+        ]
       }
     ]
   }

@@ -2,19 +2,20 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 11:59:44
+ * @Last Modified time: 2018-09-14 14:08:29
  */
 
 import React, { Component } from "react";
+import "../style/theme.css";
 import {
   BrowserRouter as Router,
   Route,
   Link,
-  Redirect,
   withRouter
 } from "react-router-dom";
 import Greeter from "./Greeter";
 import Login from "./Login";
+import LOGO_SVG from "../assets/logo.svg";
 const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
@@ -28,6 +29,9 @@ const fakeAuth = {
 };
 
 const auth = {
+  userInfo: {
+    name: ""
+  },
   isLogin: false,
   login(cb) {
     this.isLogin = true;
@@ -49,9 +53,27 @@ const AuthButton = withRouter(({ history }) => {
       signout
     </button>
   ) : (
-    "you are not login"
+    ""
   );
 });
+
+const OldSchoolMenuLink = ({ label, to, activeOnlyWhenExact }) => (
+  <Route
+    path={to}
+    exact={activeOnlyWhenExact}
+    children={({ match }) => (
+      <div className={match ? "active" : ""}>
+        {match ? "> " : ""}
+        <Link to={to}>{label}</Link>
+      </div>
+    )}
+  />
+);
+
+const NoMatch = ({location}) => {
+  return <div>404 Not Found</div>;
+};
+
 export default class Home extends Component {
   state = {
     isLogin: auth.isLogin
@@ -60,17 +82,18 @@ export default class Home extends Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
+          <img src={LOGO_SVG} alt="" width={50} height={50} />
+          <span>DEMO LINK</span>
+          <OldSchoolMenuLink activeOnlyWhenExact={true} to="/" label="Home" />
+          <OldSchoolMenuLink to="/login" label="Login" />
+          <Link to="/also/will/not/match">Also Will Not Match</Link>
           <AuthButton />
           <Route exact path="/" render={() => <Greeter auth={auth} />} />
-          <Route path="/login" render={() => <Login auth={auth} />} />
+          <Route
+            path="/login"
+            render={props => <Login {...props} auth={auth} />}
+          />
+          <Route component={NoMatch} />
         </div>
       </Router>
     );
