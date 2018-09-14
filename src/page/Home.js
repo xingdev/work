@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 18:56:09
+ * @Last Modified time: 2018-09-14 19:24:02
  */
 
 import React, { Component } from "react";
@@ -13,7 +13,7 @@ import { inject, Provider } from "mobx-react";
 import Greeter from "./Greeter";
 import Login from "./Login";
 import LOGO_SVG from "../assets/logo.svg";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Button } from "antd";
 const { Header, Content, Footer } = Layout;
 const store = observable({
   isAuth: false,
@@ -23,21 +23,29 @@ const store = observable({
 });
 
 const AuthButton = inject("store")(props => {
-  return !props.store.isAuth ? (
-    ""
-  ) : (
-    <button onClick={() => (props.store.isAuth = false)}>signout</button>
+  return (
+    props.store.isAuth && (
+      <div className="auth-button">
+        <Button onClick={() => (props.store.isAuth = false)}>signout</Button>
+      </div>
+    )
   );
 });
+
 export default class Home extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router>
           <Layout className="layout">
-            <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+            <Header className="header">
               <div className="logo">
-                <img src={LOGO_SVG} alt="logo" height={35} />
+                <img
+                  src={LOGO_SVG}
+                  alt="logo"
+                  height={35}
+                  style={{ marginRight: 10 }}
+                />
                 <span>Project Demo</span>
               </div>
               <Menu
@@ -52,10 +60,10 @@ export default class Home extends Component {
                   <Link to="login">Login</Link>
                 </Menu.Item>
               </Menu>
+              <AuthButton />
             </Header>
             <Content style={{ padding: "0 50px", marginTop: 64 }}>
               <div style={{ background: "#fff", padding: 24, minHeight: 380 }}>
-                <AuthButton />
                 <Route exact path="/" component={Greeter} />
                 <Route path="/login" component={Login} />
               </div>
