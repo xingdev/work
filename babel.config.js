@@ -16,7 +16,8 @@ const presets = [
 
 const plugins = [
   "@babel/plugin-proposal-class-properties",
-  ["@babel/plugin-proposal-decorators", { legacy: true }]
+  ["@babel/plugin-proposal-decorators", { legacy: true }],
+  ["import", { libraryName: "antd", libraryDirectory: "lib", style: "css" }]
 ];
 
 module.exports = { presets, plugins };

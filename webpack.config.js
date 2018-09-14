@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-
+const path = require("path");
 module.exports = {
   mode: "development",
   entry: __dirname + "/src",
@@ -16,20 +16,30 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /(\.jsx|\.js)$/,
-        use: {
-          loader: "babel-loader"
-        },
-        exclude: /node_modules/
-      },
-      {
-        test: /.css$/,
+        test: /\.css$/,
         use: [
           {
             loader: "style-loader"
           },
           {
             loader: "css-loader"
+          }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: "style-loader" // creates style nodes from JS strings
+          },
+          {
+            loader: "css-loader" // translates CSS into CommonJS
+          },
+          {
+            loader: "less-loader",
+            options: {
+              javascriptEnabled: true
+            } // compiles Less to CSS
           }
         ]
       },
@@ -43,6 +53,13 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /(\.jsx|\.js)$/,
+        use: {
+          loader: "babel-loader"
+        },
+        exclude: /node_modules/
       }
     ]
   }

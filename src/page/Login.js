@@ -2,11 +2,13 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 15:50:11 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 16:14:30
+ * @Last Modified time: 2018-09-14 17:12:34
  */
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { observer, inject } from "mobx-react";
+import { Input } from "antd";
+
 @inject("store")
 @observer
 export default class Login extends Component {
@@ -27,7 +29,7 @@ export default class Login extends Component {
       <div>
         <div>
           name:&nbsp;&nbsp;
-          <input onChange={this.onChange} />
+          <Input onChange={this.onChange} />
         </div>
         <button onClick={this.onLogin}>login</button>
       </div>
