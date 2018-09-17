@@ -5,10 +5,7 @@ before_script:
   - npm i -g
 install:
   - npm run build
-cache:
-  bundler: true
-  directories:
-    - node_modules
+cache: false
 deploy:
   provider: pages
   skip-cleanup: true
