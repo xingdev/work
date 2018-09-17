@@ -2,14 +2,14 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-14 19:26:34
+ * @Last Modified time: 2018-09-17 10:38:05
  */
 
 import React, { Component } from "react";
 import "../style/theme.less";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { observable } from "mobx";
-import { inject, Provider } from "mobx-react";
+import { inject, Provider, observer } from "mobx-react";
 import Greeter from "./Greeter";
 import Login from "./Login";
 import LOGO_SVG from "../assets/logo.svg";
@@ -22,15 +22,17 @@ const store = observable({
   }
 });
 
-const AuthButton = inject("store")(props => {
-  return (
-    props.store.isAuth && (
-      <div className="auth-button">
-        <Button onClick={() => (props.store.isAuth = false)}>signout</Button>
-      </div>
-    )
-  );
-});
+const AuthButton = inject("store")(
+  observer(props => {
+    return (
+      props.store.isAuth && (
+        <div className="auth-button">
+          <Button onClick={() => (props.store.isAuth = false)}>signout</Button>
+        </div>
+      )
+    );
+  })
+);
 
 export default class Home extends Component {
   render() {
