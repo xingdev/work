@@ -1,11 +1,9 @@
 language: node_js
 node_js:
   - 8
-before_script:
-  - npm i -g
+  
 install:
-  - npm run build
-cache: false
+  - npm i && npm run build
 deploy:
   provider: pages
   skip-cleanup: true
