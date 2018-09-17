@@ -1,17 +1,10 @@
-const webpack = require("webpack");
 const path = require("path");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
-  mode: "development",
-  entry: __dirname + "/src",
-  output: {
-    path: __dirname + "/build",
-    filename: "bundle.js"
-  },
-  devtool: "eval-source-map",
-  devServer: {
-    contentBase: "./build",
-    historyApiFallback: true,
-    inline: true
+  entry: {
+    app: "./src/index.js"
   },
   module: {
     rules: [
@@ -62,5 +55,15 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
+  },
+  plugins: [
+    new CleanWebpackPlugin(["dist"]),
+    new HtmlWebpackPlugin({
+      title: "Production"
+    })
+  ],
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist")
   }
 };
