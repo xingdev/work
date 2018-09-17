@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-17 10:38:05
+ * @Last Modified time: 2018-09-17 15:00:07
  */
 
 import React, { Component } from "react";
@@ -56,10 +56,10 @@ export default class Home extends Component {
                 style={{ lineHeight: "64px" }}
               >
                 <Menu.Item>
-                  <Link to="/">Home</Link>
+                  <Link to="./">Home</Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link to="login">Login</Link>
+                  <Link to="./login">Login</Link>
                 </Menu.Item>
               </Menu>
               <AuthButton />
