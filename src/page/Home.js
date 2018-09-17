@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-17 15:00:07
+ * @Last Modified time: 2018-09-17 17:11:39
  */
 
 import React, { Component } from "react";
@@ -14,6 +14,7 @@ import Greeter from "./Greeter";
 import Login from "./Login";
 import LOGO_SVG from "../assets/logo.svg";
 import { Layout, Menu, Button } from "antd";
+import m from "../lib/map";
 const { Header, Content, Footer } = Layout;
 const store = observable({
   isAuth: false,
@@ -56,10 +57,10 @@ export default class Home extends Component {
                 style={{ lineHeight: "64px" }}
               >
                 <Menu.Item>
-                  <Link to="./">Home</Link>
+                  <Link to="/">Home</Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link to="./login">Login</Link>
+                  <Link to="/login">Login</Link>
                 </Menu.Item>
               </Menu>
               <AuthButton />
