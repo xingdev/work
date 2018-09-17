@@ -5,7 +5,7 @@
     "description": "work",
     "license": "NO LICENSED",
     "scripts": {
-        "start": "webpack",
+        "build": "webpack",
         "server": "webpack-dev-server --open"
     },
     "dependencies": {
