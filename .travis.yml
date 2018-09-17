@@ -1,16 +1,16 @@
 language: node_js
 node_js:
-  - 8
+- 8
 before_script:
-  - npm i -g
-
+- npm i -g
 cache:
   directories:
-    - "node_modules"
+  - node_modules
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: "dd57e8a0c05eb189c28b6045731064ee383d0689"
+  github-token:
+    secure: RDLrQoQDQLt2sqKauDa5MzJBbZ7RndTvJUSrCl83/p53HQHAkPfrLaMP2QVnJ3Iz7G2BdtTxXt1Sh38SIS5zaCgUVl2ATxbk5Ja2nGzPbmx8ALzUitaZVkJW+EhiXz1VXRXEey0a9vZdaDNWdosWYvZZZTioPZ4TZNryR30I7WECsXB+O4m7TxrcotMeQiOVTox/f9ZT6m9mSjVkarG8bGKinyuVqAfp/r1tOC9f7Xg7YG4U8OnyeuyyKvOiu6qw6v1yOL4iUmCTV6UuitBuh4n0F8S+MnzzadKKCVXfkB9Y2b3Wn+jigAE67wcOGgR3O1RDI8y1iu1NaPLGakmgRV7euFtfvSl6r/J+Gddxo6/0tj3a9BERTebFzQdqzKhhE2j30W3uuMs74KhgkjTfEsuWQqYoEGLrDYp+yqm8vSHEr5FNH4PLdakjhvazctrfmc+G5vN380vBvSVG6OpZWkztqmIfTE7xTQ+FzRyUJZcWeN1s0HtrDQe62eb/+WcFTeolm/QkCj9L6f94cc0BSJixREA759ICUoSuAkLue0owsiOuGRjN02YohICHEzGRy+noTGAkA0Yz7VNG2iJCy0nTViNKzKbNYfNTZZT+EkVvlVV/eQqqNUZ6NHtI6P6ICs/sgcZW54akjfQzXjVwHrI7e0GvKioPcxRYy8Yvhms=
   keep-history: true
   on:
     branch: master
