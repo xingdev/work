@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 15:50:11 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-17 17:33:22
+ * @Last Modified time: 2018-09-17 19:48:05
  */
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
@@ -41,12 +41,6 @@ export default class Login extends Component {
             <Input onChange={this.onChange} />
           </Col>
           <Col span={4} />
-        </Row>
-        <Row gutter={16} style={{ marginBottom: "10px" }}>
-          <Col span={4}>phone:</Col>
-          <Col span={16}>
-            <Input onChange={this.test} />
-          </Col>
         </Row>
         <Row gutter={16}>
           <Col span={16}>

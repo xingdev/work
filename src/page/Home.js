@@ -2,12 +2,12 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-17 19:00:46
+ * @Last Modified time: 2018-09-17 19:46:58
  */
 
 import React, { Component } from "react";
 import "../style/theme.less";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 import { observable } from "mobx";
 import { inject, Provider, observer } from "mobx-react";
 import Greeter from "./Greeter";
