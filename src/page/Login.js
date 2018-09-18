@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 15:50:11 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-17 19:48:05
+ * @Last Modified time: 2018-09-17 19:52:00
  */
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
@@ -22,12 +22,6 @@ export default class Login extends Component {
       this.setState({ name: e.target.value });
     }
   };
-
-  test = e => {
-    const reg = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-    console.log(reg.test(e.target.value));
-  };
-
   render() {
     if (this.props.store.isAuth) {
       return <Redirect to={{ pathname: "/" }} />;
