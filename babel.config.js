@@ -1,5 +1,4 @@
 const presets = [
-  ["@babel/preset-react"],
   [
     "@babel/env",
     {
@@ -11,12 +10,13 @@ const presets = [
       },
       useBuiltIns: "usage"
     }
-  ]
+  ],
+  "@babel/preset-react"
 ];
 
 const plugins = [
-  "@babel/plugin-proposal-class-properties",
   ["@babel/plugin-proposal-decorators", { legacy: true }],
+  ["@babel/plugin-proposal-class-properties", { loose: true }],
   ["import", { libraryName: "antd", libraryDirectory: "lib", style: "css" }]
 ];
 
