@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 15:50:11 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-17 15:18:10
+ * @Last Modified time: 2018-09-18 17:27:35
  */
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
@@ -10,7 +10,7 @@ import axios from "axios";
 import { Button } from "antd";
 @inject("store")
 @observer
-export default class Greeter extends Component {
+class Greeter extends Component {
   state = {
     data: [],
     loading: false
@@ -61,3 +61,5 @@ export default class Greeter extends Component {
     );
   }
 }
+
+export default Greeter;

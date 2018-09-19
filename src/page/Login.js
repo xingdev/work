@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 15:50:11 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-18 14:23:59
+ * @Last Modified time: 2018-09-18 17:27:59
  */
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 import { Input, Col, Row, Button } from "antd";
 @inject("store")
 @observer
-export default class Login extends Component {
+class Login extends Component {
   state = {};
   onLogin = () => {
     if (!this.state.name) return alert("name required");
@@ -47,3 +47,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default Login;

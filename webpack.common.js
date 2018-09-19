@@ -1,7 +1,9 @@
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const devMode = process.env.NODE_ENV !== "production";
 module.exports = {
   entry: {
     app: "./src/index.js"
@@ -11,28 +13,20 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader"
-          }
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader"
         ]
       },
       {
         test: /\.less$/,
         use: [
-          {
-            loader: "style-loader" // creates style nodes from JS strings
-          },
-          {
-            loader: "css-loader" // translates CSS into CommonJS
-          },
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
           {
             loader: "less-loader",
             options: {
               javascriptEnabled: true
-            } // compiles Less to CSS
+            }
           }
         ]
       },
@@ -49,9 +43,7 @@ module.exports = {
       },
       {
         test: /(\.jsx|\.js)$/,
-        use: {
-          loader: "babel-loader"
-        },
+        use: ["babel-loader", "eslint-loader"],
         exclude: /node_modules/
       }
     ]
@@ -60,6 +52,10 @@ module.exports = {
     new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
       title: "Production"
+    }),
+    new MiniCssExtractPlugin({
+      filename: devMode ? "[name].css" : "[name].[hash].css",
+      chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
     })
   ],
   output: {
