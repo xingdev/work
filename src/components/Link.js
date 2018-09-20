@@ -1,2 +1,7 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom'
+
+export default class ELink extends Component {
+  render() {
+    return <a>{this.props.name}</a>;
+  }
+}
