@@ -11,13 +11,15 @@ const presets = [
       useBuiltIns: "usage"
     }
   ],
-  "@babel/preset-react"
+  "@babel/preset-react",
+  "@babel/preset-typescript"
 ];
 
 const plugins = [
   ["@babel/plugin-proposal-decorators", { legacy: true }],
   ["@babel/plugin-proposal-class-properties", { loose: true }],
-  ["import", { libraryName: "antd", libraryDirectory: "lib", style: "css" }]
+  ["import", { libraryName: "antd", libraryDirectory: "lib", style: "css" }],
+  "@babel/plugin-syntax-dynamic-import"
 ];
 
 module.exports = { presets, plugins };

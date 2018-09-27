@@ -3,7 +3,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const devMode = process.env.NODE_ENV !== "production";
+const devMode = process.env.NODE_ENV !== "development";
 module.exports = {
   entry: {
     app: "./src/index.js"
@@ -11,16 +11,25 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(png|jpg|gif|svg)$/i,
         use: [
-          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
-          "css-loader"
+          {
+            loader: "file-loader",
+            options: {
+              name: "[hash][name].[ext]",
+              outputPath: "images/"
+            }
+          }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
         test: /\.less$/,
         use: [
-          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           "css-loader",
           {
             loader: "less-loader",
@@ -30,19 +39,19 @@ module.exports = {
           }
         ]
       },
+      // {
+      //   test: /\.(png|jpg|gif|svg)$/i,
+      //   use: [
+      //     {
+      //       loader: "url-loader",
+      //       options: {
+      //         limit: 8192
+      //       }
+      //     }
+      //   ]
+      // },
       {
-        test: /\.(png|jpg|gif|svg)$/i,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 8192
-            }
-          }
-        ]
-      },
-      {
-        test: /(\.jsx|\.js)$/,
+        test: /(\.jsx|\.js|\.ts)$/,
         use: ["babel-loader", "eslint-loader"],
         exclude: /node_modules/
       }

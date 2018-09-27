@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-19 11:07:14
+ * @Last Modified time: 2018-09-27 19:08:16
  */
 
 import React, { Component } from "react";
@@ -71,7 +71,7 @@ export default class Home extends Component {
             <Content style={{ padding: "0 50px", marginTop: 64 }}>
               <div style={{ background: "#fff", padding: 24, minHeight: 1000 }}>
                 <Route exact path="/" component={Greeter} />
-                <Route path="/mobx" component={MobxPage} />
+                <Route path="/mobx" render={() => <MobxPage />} />
                 <Route path="/login" component={Login} />
               </div>
             </Content>
