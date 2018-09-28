@@ -2,19 +2,17 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-27 19:08:16
+ * @Last Modified time: 2018-09-28 13:33:31
  */
 
 import React, { Component } from "react";
 import "../style/theme.less";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { observable } from "mobx";
 import { inject, Provider, observer } from "mobx-react";
-import Greeter from "./Greeter";
-import Login from "./Login";
 import LOGO_SVG from "../assets/logo.svg";
 import { Layout, Menu, Button } from "antd";
-import MobxPage from "./MobxPage";
+import asyncComponent from "../lib/asyncComponent";
 const { Header, Content, Footer } = Layout;
 const store = observable({
   isAuth: false,
@@ -35,7 +33,14 @@ const AuthButton = inject("store")(
   })
 );
 
+const lazyLoad = () => {};
+
 export default class Home extends Component {
+  async lazyload(id) {
+    const plugin = await import("./MobxPage");
+    return plugin.default.MobxPage;
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -70,9 +75,21 @@ export default class Home extends Component {
             </Header>
             <Content style={{ padding: "0 50px", marginTop: 64 }}>
               <div style={{ background: "#fff", padding: 24, minHeight: 1000 }}>
-                <Route exact path="/" component={Greeter} />
-                <Route path="/mobx" render={() => <MobxPage />} />
-                <Route path="/login" component={Login} />
+                <Switch>
+                  <Route
+                    exact
+                    path="/"
+                    component={asyncComponent(() => import("./Greeter"))}
+                  />
+                  <Route
+                    path="/mobx"
+                    component={asyncComponent(() => import("./MobxPage"))}
+                  />
+                  <Route
+                    path="/login"
+                    component={asyncComponent(() => import("./Login"))}
+                  />
+                </Switch>
               </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
