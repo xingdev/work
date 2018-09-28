@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{241:function(n,e,t){"use strict";t.r(e),t.d(e,"default",function(){return i});t(89);var l=t(66),a=t.n(l),r=t(1),c=t.n(r);class i extends r.Component{handleClick(){t.e(4).then(t.bind(null,240)).then(n=>{console.log(n.default(1,2))})}render(){return c.a.createElement("div",null,c.a.createElement(a.a,{onClick:this.handleClick,type:"primary"},"asyn"))}}}}]);
+//# sourceMappingURL=0.bundle.js.map

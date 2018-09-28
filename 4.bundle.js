@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{240:function(n,o,t){"use strict";t.r(o),t.d(o,"a",function(){return u}),t.d(o,"default",function(){return r});const u="hello world";function r(n,o){return n+o}}}]);
+//# sourceMappingURL=4.bundle.js.map
