@@ -2,23 +2,32 @@
  * @Author: xingdev 
  * @Date: 2018-09-18 14:26:37 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-27 19:18:42
+ * @Last Modified time: 2018-09-29 14:14:37
  */
 import React, { Component } from "react";
 import { Button } from "antd";
+import Consumer from "../components/Consumer";
+import Provider from "../components/Provider";
+
 export default class MobxPage extends Component {
-  handleClick() {
+  state = {
+    value: { d: 1 }
+  };
+  handleClick = () => {
     import("../ts/helloworld.ts").then(A => {
-      console.log(A.default(1, 2));
+      this.setState({
+        value: { d: 4 }
+      });
     });
-  }
+  };
   render() {
     return (
-      <div>
+      <Provider value={this.state.value}>
         <Button onClick={this.handleClick} type="primary">
           asyn
         </Button>
-      </div>
+        <Consumer>ddd</Consumer>
+      </Provider>
     );
   }
 }

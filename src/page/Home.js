@@ -2,7 +2,7 @@
  * @Author: xingdev 
  * @Date: 2018-09-13 16:42:09 
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-28 13:33:31
+ * @Last Modified time: 2018-09-29 18:40:07
  */
 
 import React, { Component } from "react";
@@ -70,6 +70,9 @@ export default class Home extends Component {
                 <Menu.Item>
                   <Link to="/login">Login</Link>
                 </Menu.Item>
+                <Menu.Item>
+                  <Link to="/demo">demo</Link>
+                </Menu.Item>
               </Menu>
               <AuthButton />
             </Header>
@@ -88,6 +91,10 @@ export default class Home extends Component {
                   <Route
                     path="/login"
                     component={asyncComponent(() => import("./Login"))}
+                  />
+                  <Route
+                    path="/demo"
+                    component={asyncComponent(() => import("./Demo"))}
                   />
                 </Switch>
               </div>
