@@ -2,6 +2,8 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const webpack = require("webpack");
 const devMode = process.env.NODE_ENV !== "development";
 module.exports = {
@@ -68,6 +70,13 @@ module.exports = {
     })
   ],
   optimization: {
+    // minimizer: [
+    //   new UglifyJsPlugin({
+    //     cache: true,
+    //     sourceMap: true,
+    //     uglifyOptions: { ecma: 8 }
+    //   })
+    // ],
     splitChunks: {
       cacheGroups: {
         vendor: {
