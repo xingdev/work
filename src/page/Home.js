@@ -1,8 +1,8 @@
 /*
- * @Author: xingdev 
- * @Date: 2018-09-13 16:42:09 
+ * @Author: xingdev
+ * @Date: 2018-09-13 16:42:09
  * @Last Modified by: xingdev
- * @Last Modified time: 2018-09-29 18:40:07
+ * @Last Modified time: 2018-11-12 16:26:07
  */
 
 import React, { Component } from "react";
@@ -13,6 +13,7 @@ import { inject, Provider, observer } from "mobx-react";
 import LOGO_SVG from "../assets/logo.svg";
 import { Layout, Menu, Button } from "antd";
 import asyncComponent from "../lib/asyncComponent";
+import axios from "axios";
 const { Header, Content, Footer } = Layout;
 const store = observable({
   isAuth: false,
@@ -36,6 +37,17 @@ const AuthButton = inject("store")(
 const lazyLoad = () => {};
 
 export default class Home extends Component {
+  constructor() {
+    super();
+    axios
+      .get("/api/posts")
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
   async lazyload(id) {
     const plugin = await import("./MobxPage");
     return plugin.default.MobxPage;
@@ -73,6 +85,9 @@ export default class Home extends Component {
                 <Menu.Item>
                   <Link to="/demo">demo</Link>
                 </Menu.Item>
+                <Menu.Item>
+                  <Link to="/tree">tree</Link>
+                </Menu.Item>
               </Menu>
               <AuthButton />
             </Header>
@@ -95,6 +110,10 @@ export default class Home extends Component {
                   <Route
                     path="/demo"
                     component={asyncComponent(() => import("./Demo"))}
+                  />
+                  <Route
+                    path="/tree"
+                    component={asyncComponent(() => import("./TreeTest"))}
                   />
                 </Switch>
               </div>

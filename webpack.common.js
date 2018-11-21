@@ -1,14 +1,14 @@
-const path = require("path");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const webpack = require("webpack");
-const devMode = process.env.NODE_ENV !== "development";
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const webpack = require('webpack')
+const devMode = process.env.NODE_ENV !== 'development'
 module.exports = {
   entry: {
-    app: "./src/index.js"
+    app: './src/index.js'
   },
   module: {
     rules: [
@@ -16,25 +16,25 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/i,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              name: "[hash][name].[ext]",
-              outputPath: "images/"
+              name: '[hash][name].[ext]',
+              outputPath: 'images/'
             }
           }
         ]
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
+          'css-loader',
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               javascriptEnabled: true
             }
@@ -54,19 +54,19 @@ module.exports = {
       // },
       {
         test: /(\.jsx|\.js|\.ts)$/,
-        use: ["babel-loader", "eslint-loader"],
+        use: ['babel-loader'],
         exclude: /node_modules/
       }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: "Production"
+      title: 'Production'
     }),
     new MiniCssExtractPlugin({
-      filename: devMode ? "[name].css" : "[name].[hash].css",
-      chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
     })
   ],
   optimization: {
@@ -81,15 +81,15 @@ module.exports = {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: "vendor",
-          chunks: "all"
+          name: 'vendor',
+          chunks: 'all'
         }
       }
     }
   },
   output: {
-    filename: "[name].bundle.js",
-    chunkFilename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
   }
-};
+}
